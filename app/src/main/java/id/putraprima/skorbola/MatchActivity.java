@@ -25,6 +25,7 @@ public class MatchActivity extends AppCompatActivity {
     private TextView awayTextScore;
     private String listHomeScorer = "";
     private String listAwayScorer = "";
+    private String win;
 //    private TextView minuteText;
 
     private static final int HOME_SCORE_REQUEST_CODE = 1;
@@ -111,5 +112,24 @@ public class MatchActivity extends AppCompatActivity {
                 textView.setText(listAwayScorer);
             }
         }
+    }
+
+    public void handleCekHasil(View view) {
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra(ResultActivity.EXTRA_RESULT, win);
+        if (homeScore > awayScore){
+            win = "Pemenang" + homeText.getText().toString();
+            intent.putExtra(ResultActivity.EXTRA_RESULT,win);
+        }
+        else if (awayScore > homeScore){
+            win = "Pemenang" + awayText.getText().toString();
+            intent.putExtra(ResultActivity.EXTRA_RESULT,win);
+        }
+        else if (homeScore == awayScore){
+            win = "Draw";
+            intent.putExtra(ResultActivity.EXTRA_RESULT,win);
+        }
+
+        startActivity(intent);
     }
 }
